@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="addingnotepade.css">
+    <script src="https://kit.fontawesome.com/c3dbffe7bc.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="section1">
+        <div class="section1-icon">
+            <a href=""><i id="btn" class="fas fa-bars"></i></a>
+        </div>
+        <div class="section1-text">
+            <h1>Welcome To Add Note App</h1>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam, sint</p>
+        </div>
+        <div class="fixedbar">
+            <img src="back.png" alt="">
+            <div class="subfixed-bar">
+                <h3>Add a Note-Pade</h3>
+                <a id="icon-2" href="">
+                    <i class="fas fa-plus-circle"></i>
+                </a>
+            </div>
+            <span id="close2">x</span>
+        </div>
+        <div class="form1"></div>
+    </div>
+
+    <script>
+        var small = document.querySelector('.form1')
+        var icon = document.querySelector("#btn");
+        icon.addEventListener('click', function (e) {
+            e.preventDefault()
+            document.getElementsByClassName('fixedbar')[0].style.left = "0%";
+            document.getElementsByClassName('fixedbar')[0].style.transition = "0.6s ease"
+        })
+
+        var icon2 = document.querySelector('#icon-2');
+
+
+
+        icon2.addEventListener('click', function (e) {
+            e.preventDefault();
+            var form = '';
+            form += `<div class="form">
+               
+            <input id="input1" type="text" placeholder="Name...">
+           
+            <input id="input2" type="text" placeholder="Phone No/Email...">
+            <textarea id="input3" rows="5" placeholder="Message..."></textarea>
+            <button id="btn2">LOGIN</button>
+            <span id="close1">x<span>
+            </div>`;
+            small.innerHTML = form
+
+
+
+            var btn2 = document.getElementById('btn2');
+            let arr = []
+
+
+
+            btn2.addEventListener('click', function (e) {
+                var input1 = document.querySelector('#input1').value;
+                var input2 = document.querySelector('#input2').value;
+                var input3 = document.querySelector('#input3').value;
+                e.preventDefault()
+
+                if (input1 && input2 && input3) {
+                    var obj = {
+                        name: `${input1}`,
+                        phone: `${input2}`,
+                        message: `${input3}`
+
+                    }
+                    arr.push(obj)
+                    localStorage.setItem('data', JSON.stringify(arr))
+
+                    alert(`SAVED !`)
+                    clearForm()
+
+
+
+                } else {
+                    alert(`Please fill the all fields`)
+                    clearForm()
+
+                }
+
+
+            })
+
+            function clearForm() {
+                input1.value = ''
+                input2.value = ''
+                input3.value = ''
+            }
+
+            var close1 = document.getElementById('close1');
+            close1.addEventListener('click', function () {
+                small.innerHTML = ''
+            })
+
+
+        })
+
+        var close2=document.getElementById('close2');
+        close2.addEventListener('click',function(){
+            document.getElementsByClassName('fixedbar')[0].style.left='-30%';
+            document.getElementsByClassName('fixedbar')[0].style.transition='0.6 ease'
+
+        })
+    </script>
+</body>
+
+</html>
